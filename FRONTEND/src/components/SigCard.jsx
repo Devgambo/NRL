@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Title({title,subline}) {
+function SigCard() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function Title({title,subline}) {
     )
 }
 
-export default Title
+export default SigCard
