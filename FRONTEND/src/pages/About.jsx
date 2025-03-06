@@ -1,13 +1,15 @@
 import { ScrollBasedVelocityDemo } from '@/components/VelScroll'
+import Title from '@/components/Title'
 import React from 'react'
 
 function About() {
     return (
         <div className='text-white'>
-            <ScrollBasedVelocityDemo  text={"ABOUT"}/>
+            {/* <ScrollBasedVelocityDemo  text={"ABOUT"}/> */}
+            <Title title={"ABOUT US"}/>
             <div className='grid grid-cols-5'>
-                <div className='m-10 text-2xl col-span-3'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dignissimos magni, beatae accusamus fuga, magnam incidunt quidem quis autem quasi corporis cupiditate! Libero rem obcaecati odit quaerat eligendi nihil sapiente nobis modi esse ut doloribus fugit commodi laboriosam corrupti dolores, hic qui? Nulla, atque dicta dolorum quidem minima quam voluptatem aperiam in voluptas tempore officia illo asperiores, rem odio, veritatis ipsam. Id natus pariatur iusto culpa iure sequi tempora nostrum aspernatur explicabo a rerum corporis debitis reiciendis, tenetur, incidunt provident sint non odio ratione deserunt sunt. Nihil laboriosam earum ea enim voluptas perspiciatis fuga suscipit, a debitis temporibus, soluta officiis.
+                <div className='m-10 col-span-3 mb-4 text-xl space-grotesk text-neutral-300 md:text-xl'>
+                NITK Rocket League is a student-led rocketry team at NITK, founded to design, build, and launch high-performance rockets for national and international competitions. With a strong focus on propulsion and aerodynamics, we develop innovative airframes and solid rocket motors, optimizing performance through simulations and experimental testing. From achieving precise altitude targets in model rocketry to pioneering indigenous propellant research for the Spaceport America Cup, we are dedicated to pushing the boundaries of aerospace engineering.
                 </div>
                 <div className='col-span-2'>
                     image

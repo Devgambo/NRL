@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SigCard() {
+function Links() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function SigCard() {
     )
 }
 
-export default SigCard
+export default Links
