@@ -1,4 +1,3 @@
-import { ScrollBasedVelocityDemo } from '@/components/VelScroll'
 import Title from '@/components/Title'
 import React from 'react'
 

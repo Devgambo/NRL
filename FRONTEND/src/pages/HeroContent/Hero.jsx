@@ -11,7 +11,6 @@ function Hero() {
                 muted
                 playsInline
             ></video>
-            <div className="flex items-center justify-center"><Navbar /></div>
             {/* Dark Overlay
             <div className="absolute inset-0 bg-black/50"></div> */}
             {/* Gradient Fade-out to Black */}
