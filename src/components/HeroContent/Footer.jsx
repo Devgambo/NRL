@@ -28,16 +28,20 @@ function Footer() {
                     method: 'POST',
                 })
                 const data = await response.json()
-                setVisitCount(data.count)
+                // Ensure we have a valid count, fallback to 0 if undefined
+                setVisitCount(data.count ?? 0)
             } catch (error) {
                 console.error('Error tracking visit:', error)
                 // Fallback: just get the count without incrementing
                 try {
                     const response = await fetch('/api/visits')
                     const data = await response.json()
-                    setVisitCount(data.count)
+                    // Ensure we have a valid count, fallback to 0 if undefined
+                    setVisitCount(data.count ?? 0)
                 } catch (fallbackError) {
                     console.error('Error fetching visit count:', fallbackError)
+                    // Set to 0 if all else fails to prevent undefined errors
+                    setVisitCount(0)
                 }
             }
         }
