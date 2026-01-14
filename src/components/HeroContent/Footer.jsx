@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { ScreenEndText } from '@/components/ScreenEndText'
 import RecieveMsg from '@/components/RecieveMsg'
@@ -16,9 +16,33 @@ const socialLinks = [
     { icon: FiLinkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
 ]
 
+// Rocketry facts and jokes that display randomly on each page refresh
+const rocketryFacts = [
+    "🚀 The Saturn V rocket remains the most powerful rocket ever successfully flown!",
+    "🔥 Rocket fuel can burn at temperatures over 3,300°C — hotter than molten lava!",
+    "🌙 It only takes about 3 days to travel from Earth to the Moon by rocket.",
+    "💨 The exhaust velocity of a rocket can exceed 4.5 km/s!",
+    "🛸 Why did the rocket break up with the satellite? It needed more space!",
+    "🧑‍🚀 A rocket must reach 11.2 km/s to escape Earth's gravity — that's escape velocity!",
+    "🎯 SpaceX's Falcon 9 has landed successfully over 200 times!",
+    "😄 What do rockets eat? Launch meat!",
+    "🔬 Robert Goddard launched the first liquid-fueled rocket in 1926.",
+    "⚡ The Space Shuttle's main engines produced 37 million horsepower at liftoff!",
+    "🌍 Rockets work in space because they don't need air — they carry their own oxidizer!",
+    "😂 Why don't rockets ever get lost? They always follow their trajectory!",
+    "🏗️ The Starship rocket stands 120 meters tall — taller than the Statue of Liberty!",
+    "💡 Solid rocket boosters can't be turned off once ignited — commitment level: maximum!",
+    "🎉 Why did the rocket go to school? To get a little more thrust in life!",
+]
+
 function Footer() {
     const pathname = usePathname()
     const [visitCount, setVisitCount] = useState(null)
+
+    // Select a random fact on component mount (changes on page refresh)
+    const randomFact = useMemo(() => {
+        return rocketryFacts[Math.floor(Math.random() * rocketryFacts.length)]
+    }, [])
 
     useEffect(() => {
         // Increment visit count on component mount
@@ -197,11 +221,7 @@ function Footer() {
                         © {new Date().getFullYear()} NITK Rocket League. All rights reserved.
                     </p>
                     <p className="text-white/40 text-xs sm:text-sm text-center">
-                        Total site visits: {visitCount !== null ? (
-                            <span className="text-red-400 font-semibold">{visitCount.toLocaleString()}</span>
-                        ) : (
-                            <span className="text-white/30">Loading...</span>
-                        )}
+                        {randomFact}
                     </p>
                 </motion.div>
             </div>
