@@ -5,7 +5,7 @@ function Hero() {
         <div className="relative w-full h-screen">
             <video
                 className="absolute top-0 left-0 w-full h-full object-cover"
-                src="/ved1.mp4"
+                src="/Hero_vid.mp4"
                 autoPlay
                 loop
                 muted

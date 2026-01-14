@@ -34,7 +34,7 @@ function About() {
                     className="order-1 lg:order-2 relative h-[250px] sm:h-[300px] lg:h-[400px] rounded-2xl overflow-hidden bg-white/5 border border-white/10"
                 >
                     <Image
-                        src="/hero.jpeg"
+                        src="/nrlmain.jpg"
                         alt="About NRL"
                         fill
                         className="object-cover"

@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ScreenEndText } from '@/components/ScreenEndText'
 import RecieveMsg from '@/components/RecieveMsg'
@@ -17,6 +18,32 @@ const socialLinks = [
 
 function Footer() {
     const pathname = usePathname()
+    const [visitCount, setVisitCount] = useState(null)
+
+    useEffect(() => {
+        // Increment visit count on component mount
+        const trackVisit = async () => {
+            try {
+                const response = await fetch('/api/visits', {
+                    method: 'POST',
+                })
+                const data = await response.json()
+                setVisitCount(data.count)
+            } catch (error) {
+                console.error('Error tracking visit:', error)
+                // Fallback: just get the count without incrementing
+                try {
+                    const response = await fetch('/api/visits')
+                    const data = await response.json()
+                    setVisitCount(data.count)
+                } catch (fallbackError) {
+                    console.error('Error fetching visit count:', fallbackError)
+                }
+            }
+        }
+
+        trackVisit()
+    }, [])
 
     const scrollToSection = (id) => {
         if (pathname === '/') {
@@ -46,11 +73,11 @@ function Footer() {
         <footer className="relative bg-black" id="footer">
             {/* Top border accent */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-red-500 to-transparent" />
-            
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-10 sm:py-16">
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
                     {/* Left Section - Logo & Info */}
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
@@ -63,7 +90,7 @@ function Footer() {
                         <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
                             NITK Rocket League is a student-led rocketry team pushing the boundaries of aerospace engineering.
                         </p>
-                        
+
                         {/* Social Links */}
                         <div className="flex gap-2 sm:gap-3">
                             {socialLinks.map((social, index) => (
@@ -84,7 +111,7 @@ function Footer() {
                     </motion.div>
 
                     {/* Navigation Links */}
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
@@ -113,7 +140,7 @@ function Footer() {
                     </motion.div>
 
                     {/* Resources Links */}
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
@@ -142,7 +169,7 @@ function Footer() {
                     </motion.div>
 
                     {/* Contact Form */}
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.3 }}
@@ -155,18 +182,22 @@ function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
                     viewport={{ once: true }}
                     className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4"
                 >
-                    <p className="text-white/40 text-xs sm:text-sm text-center sm:text-left">
+                    <p className="text-white/40 text-xs sm:text-sm text-center">
                         © {new Date().getFullYear()} NITK Rocket League. All rights reserved.
                     </p>
-                    <p className="text-white/30 text-[10px] sm:text-xs">
-                        Made with ❤️ by Devgambo
+                    <p className="text-white/40 text-xs sm:text-sm text-center">
+                        Total site visits: {visitCount !== null ? (
+                            <span className="text-red-400 font-semibold">{visitCount.toLocaleString()}</span>
+                        ) : (
+                            <span className="text-white/30">Loading...</span>
+                        )}
                     </p>
                 </motion.div>
             </div>

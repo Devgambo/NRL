@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Kash Patel",
+        "system": "Propulsion",
+        "image": "/kashyap.jpeg"
+    },
+    {
+        "name": "Agrima Singh",
+        "system": "Avionics",
+        "image": "/agrima singh.jpeg"
+    },
+    {
+        "name": "Kedar",
+        "system": "Media",
+        "image": "/kedar.png"
+    },
+    {
+        "name": "Priyanshu",
+        "system": "Web",
+        "image": "/priyanshu.jpeg"
+    },
+    {
+        "name": "Akanksh Vishwan Patil",
+        "system": "Structures",
+        "image": "/akanksh.png"
+    },
+    {
+        "name": "Pramathesh Vishwanath",
+        "system": "Avionics",
+        "image": "/Pramathesh Vishwanath.jpg"
+    },
+    {
+        "name": "Rohit L",
+        "system": "Avionics",
+        "image": "/Rohit L.jpg"
+    },
+    {
+        "name": "Om Srivastava",
+        "system": "Propulsion",
+        "image": "/Om Srivastava.jpg"
+    },
+    {
+        "name": "Swati",
+        "system": "Structures",
+        "image": "/Swati Hampiholi.jpg"
+    },
+    {
+        "name": "Shashank Pai",
+        "system": "Structures",
+        "image": "/S_pai.jpeg"
+    }
+]

@@ -3,32 +3,30 @@
 import { motion } from 'framer-motion'
 import TeamCard from '@/components/TeamCard'
 import Title from '@/components/Title'
-
-// Core team members (5 members)
-const coreTeam = [
-    { name: "John Smith", position: "Team Lead", imageSrc: "/team/mem1.jpg", linkedin: "https://linkedin.com" },
-    { name: "Sarah Johnson", position: "Technical Head", imageSrc: "/team/mem2.jpg", linkedin: "https://linkedin.com" },
-    { name: "Mike Chen", position: "Propulsion Lead", imageSrc: "/team/mem3.jpg", linkedin: "https://linkedin.com" },
-    { name: "Emily Davis", position: "Avionics Lead", imageSrc: "/team/mem4.jpg", linkedin: "https://linkedin.com" },
-    { name: "Alex Kumar", position: "Structures Lead", imageSrc: "/team/mem1.jpg" }, // No LinkedIn - optional
-]
-
-// Team members
-const teamMembers = [
-    { name: "David Wilson", position: "Avionics Engineer", imageSrc: "/team/mem2.jpg", linkedin: "https://linkedin.com" },
-    { name: "Lisa Park", position: "Propulsion Engineer", imageSrc: "/team/mem3.jpg" },
-    { name: "James Brown", position: "CAD Designer", imageSrc: "/team/mem4.jpg", linkedin: "https://linkedin.com" },
-    { name: "Priya Sharma", position: "Electronics", imageSrc: "/team/mem1.jpg" },
-    { name: "Tom Anderson", position: "Simulation", imageSrc: "/team/mem2.jpg", linkedin: "https://linkedin.com" },
-    { name: "Nina Patel", position: "Media Head", imageSrc: "/team/mem3.jpg", linkedin: "https://linkedin.com" },
-]
+import coreTeamData from '@/../../core_team.json'
+import teamData from '@/../../team.json'
 
 export default function TeamPage() {
+    // Group team members by subsystem
+    const groupBySubsystem = (members) => {
+        return members.reduce((acc, member) => {
+            const subsystem = member.subsystem
+            if (!acc[subsystem]) {
+                acc[subsystem] = []
+            }
+            acc[subsystem].push(member)
+            return acc
+        }, {})
+    }
+
+    const teamBySubsystem = groupBySubsystem(teamData)
+    const subsystems = Object.keys(teamBySubsystem).sort()
+
     return (
         <div className="min-h-screen bg-black">
             {/* Spacer for navbar */}
             <div className="h-16 sm:h-20 md:h-24" />
-            
+
             {/* Hero Section */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -52,15 +50,14 @@ export default function TeamPage() {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                     viewport={{ once: true }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-10 justify-items-center"
+                    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 md:px-10 justify-items-center max-w-7xl mx-auto"
                 >
-                    {coreTeam.map((member, index) => (
+                    {coreTeamData.map((member, index) => (
                         <TeamCard
                             key={index}
                             name={member.name}
-                            position={member.position}
-                            imageSrc={member.imageSrc}
-                            linkedin={member.linkedin}
+                            position={member.system}
+                            imageSrc={member.image}
                             index={index}
                             isCore={true}
                         />
@@ -68,29 +65,30 @@ export default function TeamPage() {
                 </motion.div>
             </section>
 
-            {/* Team Members Section */}
-            <section className="py-6 sm:py-8 pb-12 sm:pb-20">
-                <Title title="TEAM MEMBERS" />
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-6 px-4 sm:px-6 md:px-10 justify-items-center"
-                >
-                    {teamMembers.map((member, index) => (
-                        <TeamCard
-                            key={index}
-                            name={member.name}
-                            position={member.position}
-                            imageSrc={member.imageSrc}
-                            linkedin={member.linkedin}
-                            index={index}
-                            isCore={false}
-                        />
-                    ))}
-                </motion.div>
-            </section>
+            {/* Subsystem Sections */}
+            {subsystems.map((subsystem, subsystemIndex) => (
+                <section key={subsystem} className="py-6 sm:py-8">
+                    <Title title={subsystem.toUpperCase()} />
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: subsystemIndex * 0.1 }}
+                        viewport={{ once: true }}
+                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 px-4 sm:px-6 md:px-10 justify-items-center max-w-7xl mx-auto"
+                    >
+                        {teamBySubsystem[subsystem].map((member, index) => (
+                            <TeamCard
+                                key={index}
+                                name={member.name}
+                                position={subsystem}
+                                imageSrc={member.image}
+                                index={index}
+                                isCore={false}
+                            />
+                        ))}
+                    </motion.div>
+                </section>
+            ))}
 
             {/* Join CTA */}
             <motion.section

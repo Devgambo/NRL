@@ -10,18 +10,6 @@ const projects = [
         description: "Our flagship high-powered rocket designed to reach 30,000 feet. Features custom-built avionics, carbon fiber airframe, and a K-class motor.",
         image: "https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?q=80&w=2070&auto=format&fit=crop",
         tags: ["High-Power", "Competition", "2024"]
-    },
-    {
-        title: "Avionics Bay v3",
-        description: "Third-generation flight computer with real-time telemetry, GPS tracking, dual-deployment system, and custom PCB design.",
-        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop",
-        tags: ["Electronics", "R&D", "Ongoing"]
-    },
-    {
-        title: "Solid Motor Development",
-        description: "In-house development of solid rocket propellants with optimized grain geometry for consistent thrust profiles.",
-        image: "https://images.unsplash.com/photo-1457364559154-aa2644600ebb?q=80&w=2070&auto=format&fit=crop",
-        tags: ["Propulsion", "Research", "Testing"]
     }
 ]
 
